@@ -40,6 +40,7 @@ static void navswitch_action(void)
             col--; 
         position = tinygl_point(row, col);
 }
+
 int main(void)
 {
     system_init();        
