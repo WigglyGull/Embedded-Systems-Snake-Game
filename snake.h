@@ -26,5 +26,6 @@ typedef struct {
 void snake_move(snake_t* snake);
 void snake_initialize(snake_t* snake);
 void snake_handle_input(snake_t* snake);
+void snake_grow(snake_t* snake);
 
 #endif  // SNAKE_H

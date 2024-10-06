@@ -49,10 +49,13 @@ tinygl.o: ../../utils/tinygl.c ../../drivers/avr/system.h ../../drivers/display.
 snake.o: snake.c snake.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+food.o: food.c food.h ../../drivers/avr/system.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
 # Link: create ELF output file from object files.
 
 
-game.out: game.o pio.o system.o timer.o display.o ledmat.o navswitch.o font.o pacer.o tinygl.o snake.o
+game.out: game.o pio.o system.o timer.o display.o ledmat.o navswitch.o font.o pacer.o tinygl.o snake.o food.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

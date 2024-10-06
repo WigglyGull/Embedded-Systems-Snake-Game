@@ -69,19 +69,15 @@ void snake_initialize(snake_t* snake) {
 
 
 void snake_grow(snake_t* snake) {
-    if (snake->length < snake->max_length) {
-        snake->length++;  // Increase the length of the snake
-    } else {
-        //player1.win
+    if (snake->length < MAX_SNAKE_LENGTH) {
+        snake->length++;
+        }
     }
-}
 
 
 /* Change snake direction based on input */
 void snake_handle_input(snake_t* snake)
 {
-
-
     if (navswitch_push_event_p(NAVSWITCH_WEST)) {
         snake->dir = DIR_W; // Turn left
     }
