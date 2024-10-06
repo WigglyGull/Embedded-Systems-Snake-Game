@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define LOOP_RATE 350
-#define SNAKE_SPEED 1 // Speed of the snake
+#define LOOP_RATE 500
+#define SNAKE_SPEED 3 // Speed of the snake
 
 int main(void)
 {
@@ -51,24 +51,19 @@ int main(void)
     
         tick = tick + 1;  // Increment the tick counter
 
-        if (tick > LOOP_RATE / SNAKE_SPEED)
-        {
-            tick = 0;
-            snake_move(snake);  // Move snake 1 unit in the current direction
-        }
-
         draw_food(&food);// Draw the food
-        tick += 1;
+        
         if (tick > LOOP_RATE / SNAKE_SPEED)
         {
             tick = 0;
-            snake_move(snake);
-
+        
             // Check if the snake eats the food
             if (snake->body[0].x==food.position.x && snake->body[0].y==food.position.y) {
                 generate_food(snake, &food);// Generate new food
                 snake_grow(snake);
             }
+            tinygl_clear();
+            snake_move(snake);
         }
  
         snake_handle_input(snake); // Handle navswitch input to change snake direction
