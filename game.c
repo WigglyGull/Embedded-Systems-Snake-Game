@@ -10,8 +10,7 @@
 #include <time.h>
 
 #define LOOP_RATE 500
-#define SNAKE_SPEED 3 // Speed of the snake
-#define PACER_RATE 500
+#define SNAKE_SPEED 3 
 #define MESSAGE_RATE 10
 
 int main(void)
@@ -21,8 +20,6 @@ int main(void)
     int tick = 0;
     bool game_won = false;
 
-    // Seed the random number generator
-    srand(time(NULL));
 
     // Initialization system and display
     system_init();
@@ -42,21 +39,21 @@ int main(void)
         navswitch_update();
 
         if(snake->dead == true){
+            ir_uart_putc('A');
             break;
         }
         if(ir_uart_read_ready_p()){
             game_won = true;
             break;
         }
-        tinygl_clear(); // Update the screen every tick
+        
 
         for (int i = 0; i < snake->length; i++)
         {
             tinygl_draw_point(snake->body[i], 1);
         }
-        tinygl_update();
+       // tinygl_update();
 
-    
         tick = tick + 1;  // Increment the tick counter
 
         draw_food(&food);// Draw the food
@@ -79,6 +76,8 @@ int main(void)
         tinygl_update();  // Update display
     }
 
+    
+
     tinygl_font_set(&font5x7_1);
     tinygl_text_speed_set(MESSAGE_RATE);
     tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
@@ -91,7 +90,7 @@ int main(void)
     
     while(1){
         pacer_wait();
-        ir_uart_putc('A');
+        
         tinygl_update();  // Continue to update the scrolling "Game Over" message
     }
 
