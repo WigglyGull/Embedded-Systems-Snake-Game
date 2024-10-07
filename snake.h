@@ -2,7 +2,7 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-#define INITIAL_SNAKE_LENGTH 3  // Set snake length, change this to adjust size
+#define INITIAL_SNAKE_LENGTH 1  // Set snake length, change this to adjust size
 #define MAX_SNAKE_LENGTH 6  // Define a maximum length to avoid overflow
 
 //snake directions
@@ -20,6 +20,7 @@ typedef struct {
     int length;            // Current length 
     int max_length;        // Maximum length allocated
     direction_t dir;       // Current direction of the snake
+    bool dead              //So game file can detect if game is over   
 } snake_t;
 
 

@@ -4,10 +4,23 @@
 #include "snake.h"
 #include <stdlib.h>
 
+/* Check if the snake has collided with itself */
+bool snake_has_collided(snake_t* snake, tinygl_point_t new_head)
+{
+    for (int i = 1; i < snake->length; i++) {
+        if (snake->body[i].x == new_head.x && snake->body[i].y == new_head.y) {
+            return true;
+        }
+    }
+    return false;
+}
 
 /* Move the snake in its current direction */
 void snake_move(snake_t* snake)
 {
+    if(snake->dead == true){
+        return;
+    }
     // Calculate new head position
     tinygl_point_t new_head = snake->body[0];
     switch (snake->dir)
@@ -26,20 +39,20 @@ void snake_move(snake_t* snake)
             break;
     }
 
-    // Wrap around screen boundaries
-    if (new_head.x < 0)
-        new_head.x = TINYGL_WIDTH - 1;
-    else if (new_head.x >= TINYGL_WIDTH)
-        new_head.x = 0;
+    // Check for collisions with screen boundaries
+    if (new_head.x < 0 || new_head.x >= TINYGL_WIDTH || new_head.y < 0 || new_head.y >= TINYGL_HEIGHT) {
+        snake->dead = true;
+        return;
+    }
 
-    if (new_head.y < 0)
-        new_head.y = TINYGL_HEIGHT - 1;
-    else if (new_head.y >= TINYGL_HEIGHT)
-        new_head.y = 0;
+    // Check for collisions with itself
+    if (snake_has_collided(snake, new_head)) {
+        snake->dead = true;
+        return;
+    }
 
     // Shift body positions to follow the head
-    for (int i = snake->length - 1; i > 0; i--)
-    {
+    for (int i = snake->length - 1; i > 0; i--) {
         snake->body[i] = snake->body[i - 1];
     }
 
@@ -91,5 +104,3 @@ void snake_handle_input(snake_t* snake)
         snake->dir = DIR_S; // Turn back
     }
 }
-
-

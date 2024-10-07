@@ -15,11 +15,6 @@ int main(void)
     snake_t* snake = malloc(sizeof(snake_t));   
     food_t food; 
     int tick = 0;
-    bool gameOver = false;
-
-    if(gameOver == true){
-        return;
-    }
 
     // Seed the random number generator
     srand(time(NULL));
@@ -41,12 +36,14 @@ int main(void)
     /* Paced loop */
     while (1)
     {
-        pacer_wait();  // Wait for next loop iteration
-        
-        navswitch_update();
+        if(snake->dead == true){
+            return;
+        }
 
-        // Update the screen every tick
-        tinygl_clear();
+        pacer_wait();  // Wait for next loop iteration
+        navswitch_update(); 
+        tinygl_clear(); // Update the screen every tick
+
         for (int i = 0; i < snake->length; i++)
         {
             tinygl_draw_point(snake->body[i], 1);
