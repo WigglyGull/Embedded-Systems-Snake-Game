@@ -4,44 +4,48 @@
 #include "pacer.h"
 #include "snake.h" 
 #include "food.h"
+#include "ir_uart.h"
+#include "../../fonts/font5x7_1.h"
 #include <stdlib.h>
 #include <time.h>
 
 #define LOOP_RATE 500
 #define SNAKE_SPEED 3 // Speed of the snake
+#define PACER_RATE 500
+#define MESSAGE_RATE 10
 
 int main(void)
 {
     snake_t* snake = malloc(sizeof(snake_t));   
     food_t food; 
     int tick = 0;
+    bool game_won = false;
 
     // Seed the random number generator
     srand(time(NULL));
 
     // Initialization system and display
     system_init();
-
     tinygl_init(LOOP_RATE);
-
     navswitch_init();
-
     pacer_init(LOOP_RATE);
+    // ir_uart_init();
 
     // Initialize snake and food
     snake_initialize(snake);
     generate_food(snake, &food);
 
-
     /* Paced loop */
     while (1)
-    {
+    {  
+        pacer_wait();  // Wait for next loop iteration
+        navswitch_update();
+
         if(snake->dead == true){
-            return;
+            break;
         }
 
-        pacer_wait();  // Wait for next loop iteration
-        navswitch_update(); 
+        
         tinygl_clear(); // Update the screen every tick
 
         for (int i = 0; i < snake->length; i++)
@@ -71,6 +75,15 @@ int main(void)
         snake_handle_input(snake); // Handle navswitch input to change snake direction
 
         tinygl_update();  // Update display
+    }
+
+    tinygl_font_set(&font5x7_1);
+    tinygl_text_speed_set(MESSAGE_RATE);
+    tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
+    tinygl_text("Game Over");
+    while(1){
+        pacer_wait();
+        tinygl_update();  // Continue to update the scrolling "Game Over" message
     }
 
     return 0;

@@ -21,6 +21,7 @@ void snake_move(snake_t* snake)
     if(snake->dead == true){
         return;
     }
+
     // Calculate new head position
     tinygl_point_t new_head = snake->body[0];
     switch (snake->dir)
@@ -67,6 +68,7 @@ void snake_initialize(snake_t* snake) {
     snake->max_length = MAX_SNAKE_LENGTH;
     snake->body[0].x =TINYGL_WIDTH / 2; // Initialize head position
     snake->body[0].y =TINYGL_HEIGHT - 1;
+    snake->dead = false;
 
     // Initialize snake body positions
     for (int i = 1; i < snake->length; i++)

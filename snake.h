@@ -20,7 +20,7 @@ typedef struct {
     int length;            // Current length 
     int max_length;        // Maximum length allocated
     direction_t dir;       // Current direction of the snake
-    bool dead              //So game file can detect if game is over   
+    bool dead;              //So game file can detect if game is over   
 } snake_t;
 
 
