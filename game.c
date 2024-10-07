@@ -15,6 +15,11 @@ int main(void)
     snake_t* snake = malloc(sizeof(snake_t));   
     food_t food; 
     int tick = 0;
+    bool gameOver = false;
+
+    if(gameOver == true){
+        return;
+    }
 
     // Seed the random number generator
     srand(time(NULL));

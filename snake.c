@@ -78,16 +78,16 @@ void snake_grow(snake_t* snake) {
 /* Change snake direction based on input */
 void snake_handle_input(snake_t* snake)
 {
-    if (navswitch_push_event_p(NAVSWITCH_WEST)) {
+    if (navswitch_push_event_p(NAVSWITCH_WEST) && snake->dir != DIR_E && snake->dir != DIR_W) {
         snake->dir = DIR_W; // Turn left
     }
-    if (navswitch_push_event_p(NAVSWITCH_EAST)) {
-        snake->dir = DIR_E; // Turn right 
+    if (navswitch_push_event_p(NAVSWITCH_EAST) && snake->dir != DIR_E && snake->dir != DIR_W) {
+        snake->dir = DIR_E; // Turn right
     }
-    if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
+    if (navswitch_push_event_p(NAVSWITCH_NORTH) && snake->dir != DIR_N && snake->dir != DIR_S) {
         snake->dir = DIR_N; // Turn froward
     }
-    if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
+    if (navswitch_push_event_p(NAVSWITCH_SOUTH) && snake->dir != DIR_N && snake->dir != DIR_S) {
         snake->dir = DIR_S; // Turn back
     }
 }
