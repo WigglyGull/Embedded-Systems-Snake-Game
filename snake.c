@@ -69,6 +69,7 @@ void snake_initialize(snake_t* snake) {
     snake->body[0].x =TINYGL_WIDTH / 2; // Initialize head position
     snake->body[0].y =TINYGL_HEIGHT - 1;
     snake->dead = false;
+    snake->dir = DIR_S;
 
     // Initialize snake body positions
     for (int i = 1; i < snake->length; i++)

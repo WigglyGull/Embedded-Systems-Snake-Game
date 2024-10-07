@@ -29,7 +29,7 @@ int main(void)
     tinygl_init(LOOP_RATE);
     navswitch_init();
     pacer_init(LOOP_RATE);
-    // ir_uart_init();
+    ir_uart_init();
 
     // Initialize snake and food
     snake_initialize(snake);
@@ -44,8 +44,10 @@ int main(void)
         if(snake->dead == true){
             break;
         }
-
-        
+        if(ir_uart_read_ready_p()){
+            game_won = true;
+            break;
+        }
         tinygl_clear(); // Update the screen every tick
 
         for (int i = 0; i < snake->length; i++)
@@ -80,9 +82,16 @@ int main(void)
     tinygl_font_set(&font5x7_1);
     tinygl_text_speed_set(MESSAGE_RATE);
     tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
-    tinygl_text("Game Over");
+
+    if(game_won) {
+        tinygl_text("Game Won");
+    } else {
+        tinygl_text("Game Over");
+    }
+    
     while(1){
         pacer_wait();
+        ir_uart_putc('A');
         tinygl_update();  // Continue to update the scrolling "Game Over" message
     }
 

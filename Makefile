@@ -55,7 +55,7 @@ food.o: food.c food.h ../../drivers/avr/system.h
 # Link: create ELF output file from object files.
 
 
-game.out: game.o pio.o system.o timer.o display.o ledmat.o navswitch.o font.o pacer.o tinygl.o snake.o food.o
+game.out: game.o pio.o system.o timer.o display.o ledmat.o navswitch.o font.o pacer.o tinygl.o snake.o food.o ir_uart.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
