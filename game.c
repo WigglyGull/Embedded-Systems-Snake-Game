@@ -7,10 +7,9 @@
 #include "ir_uart.h"
 #include "../../fonts/font5x7_1.h"
 #include <stdlib.h>
-#include <time.h>
 
 #define LOOP_RATE 500
-#define SNAKE_SPEED 3 
+#define SNAKE_SPEED 3
 #define MESSAGE_RATE 10
 
 int main(void)
@@ -39,7 +38,6 @@ int main(void)
         navswitch_update();
 
         if(snake->dead == true){
-            ir_uart_putc('A');
             break;
         }
         if(ir_uart_read_ready_p()){
@@ -76,21 +74,21 @@ int main(void)
         tinygl_update();  // Update display
     }
 
-    
+    ir_uart_putc('A');
 
     tinygl_font_set(&font5x7_1);
     tinygl_text_speed_set(MESSAGE_RATE);
     tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
 
     if(game_won) {
-        tinygl_text("Game Won");
+        tinygl_text("Won");
     } else {
         tinygl_text("Game Over");
     }
     
+
     while(1){
         pacer_wait();
-        
         tinygl_update();  // Continue to update the scrolling "Game Over" message
     }
 

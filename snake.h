@@ -3,7 +3,7 @@
 #define SNAKE_H
 
 #define INITIAL_SNAKE_LENGTH 1  // Set snake length, change this to adjust size
-#define MAX_SNAKE_LENGTH 6  // Define a maximum length to avoid overflow
+#define MAX_SNAKE_LENGTH 8  // Define a maximum length to avoid overflow
 
 //snake directions
 typedef enum dir

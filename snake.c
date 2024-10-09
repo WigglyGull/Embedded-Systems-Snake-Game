@@ -82,8 +82,6 @@ void snake_initialize(snake_t* snake) {
     tinygl_update();
 }
 
-
-
 void snake_grow(snake_t* snake) {
     if (snake->length < MAX_SNAKE_LENGTH) {
         snake->length++;
