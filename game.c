@@ -1,3 +1,10 @@
+/** @file   game.c
+    @author Auron Walker & Yumeng Shi
+    @date   6/OCT/2024
+    @brief  Main function to run the Snake game.
+            This function initializes the game, manages the main loop for snake movement, 
+            and displays game status messages when either of the two players loses.
+*/
 #include "system.h"
 #include "navswitch.h"
 #include "tinygl.h"
@@ -12,6 +19,11 @@
 #define SNAKE_SPEED 3
 #define MESSAGE_RATE 10
 
+/**
+ * @brief Main function to run the Snake game.
+ *
+ * @return Returns 0.
+ */
 int main(void)
 {
     snake_t* snake = malloc(sizeof(snake_t));   
@@ -32,22 +44,20 @@ int main(void)
     generate_food(snake, &food);
 
     /* Paced loop */
-    while (1)
-    {  
+    while (1) {  
         pacer_wait();  // Wait for next loop iteration
         navswitch_update();
 
-        if(snake->dead == true){
+        if(snake->dead == true) {
             break;
         }
-        if(ir_uart_read_ready_p()){
+        if(ir_uart_read_ready_p()) {
             game_won = true;
             break;
         }
         
 
-        for (int i = 0; i < snake->length; i++)
-        {
+        for (int i = 0; i < snake->length; i++) {
             tinygl_draw_point(snake->body[i], 1);
         }
        // tinygl_update();
@@ -56,15 +66,14 @@ int main(void)
 
         draw_food(&food);// Draw the food
         
-        if (tick > LOOP_RATE / SNAKE_SPEED)
-        {
+        if (tick > LOOP_RATE / SNAKE_SPEED) {
             tick = 0;
-        
             // Check if the snake eats the food
             if (snake->body[0].x==food.position.x && snake->body[0].y==food.position.y) {
                 generate_food(snake, &food);// Generate new food
                 snake_grow(snake);
             }
+
             tinygl_clear();
             snake_move(snake);
         }
@@ -87,7 +96,7 @@ int main(void)
     }
     
 
-    while(1){
+    while(1) {
         pacer_wait();
         tinygl_update();  // Continue to update the scrolling "Game Over" message
     }

@@ -1,11 +1,21 @@
+/** @file   snake.h
+@author Auron Walker & Yumeng Shi
+@date   6/OCT/2024
+@brief  Snake in main game, including snake movement, collision detection, and growth mechanics.
+*/
+
 #include "tinygl.h"
 #ifndef SNAKE_H
 #define SNAKE_H
 
+
 #define INITIAL_SNAKE_LENGTH 1  // Set snake length, change this to adjust size
 #define MAX_SNAKE_LENGTH 8  // Define a maximum length to avoid overflow
 
-//snake directions
+/** 
+    @enum direction_t
+    @brief Possible directions for the snake's movement.
+*/
 typedef enum dir
 {
     DIR_N,  // North (up)
@@ -25,8 +35,11 @@ typedef struct {
 
 
 void snake_move(snake_t* snake);
+
 void snake_initialize(snake_t* snake);
+
 void snake_handle_input(snake_t* snake);
+
 void snake_grow(snake_t* snake);
 
 #endif  // SNAKE_H

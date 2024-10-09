@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/jadeshi/Desktop/encn /assignment/group_214",
+      "program": "/Users/jadeshi/Desktop/encn /assignment/group_214/build/Debug/outDebug"
+    }
+  ]
+}
