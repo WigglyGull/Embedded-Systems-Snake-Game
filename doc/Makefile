@@ -1,6 +1,6 @@
 # File:   Makefile
-# Author: Auron Walker & Yumeng Shi
-# Date:   6/OCT/2024
+# Author: M. P. Hayes, UCECE
+# Date:   12 Sep 2010
 # Descr:  Makefile for game
 
 # Definitions.
