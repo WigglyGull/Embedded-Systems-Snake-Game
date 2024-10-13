@@ -8,7 +8,7 @@ This project is a two-player version of the classic game *Snake*, developed as p
 
 ## Group Members
 - **Auron Walker**
-- **plaveholder**
+- **Yumeng Shi**
 
 ## How to Play
 
