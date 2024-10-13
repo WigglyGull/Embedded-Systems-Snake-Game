@@ -18,7 +18,7 @@ bool snake_has_collided(snake_t* snake, tinygl_point_t new_head)
 /* Move the snake in its current direction */
 void snake_move(snake_t* snake)
 {
-    if(snake->dead == true){
+    if(snake->dead == true) {
         return;
     }
 
@@ -63,7 +63,8 @@ void snake_move(snake_t* snake)
 
 
 /* Initialize and draw the snake */
-void snake_initialize(snake_t* snake) {
+void snake_initialize(snake_t* snake) 
+{
     snake->length = INITIAL_SNAKE_LENGTH;
     snake->max_length = MAX_SNAKE_LENGTH;
     snake->body[0].x =TINYGL_WIDTH / 2; // Initialize head position
@@ -72,8 +73,7 @@ void snake_initialize(snake_t* snake) {
     snake->dir = DIR_N;
 
     // Initialize snake body positions
-    for (int i = 1; i < snake->length; i++)
-    {
+    for (int i = 1; i < snake->length; i++) {
         snake->body[i] = snake->body[i - 1];  // Initially, all parts are in the same place
     }
 
@@ -84,7 +84,7 @@ void snake_initialize(snake_t* snake) {
 
 void snake_grow(snake_t* snake) {
     if (snake->length < MAX_SNAKE_LENGTH) {
-        snake->length++;
+            snake->length++;
         }
     }
 
