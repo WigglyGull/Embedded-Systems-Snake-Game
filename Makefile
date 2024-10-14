@@ -1,6 +1,6 @@
 # File:   Makefile
-# Author: Auron Walker & Yumeng Shi
-# Date:   6/OCT/2024
+# Author: M. P. Hayes, UCECE
+# Date:   12 Sep 2010
 # Descr:  Makefile for game
 
 # Definitions.
@@ -83,5 +83,6 @@ clean:
 program: game.out
 	$(OBJCOPY) -O ihex game.out game.hex
 	dfu-programmer atmega32u2 erase; dfu-programmer atmega32u2 flash game.hex; dfu-programmer atmega32u2 start
+
 
 

@@ -81,9 +81,6 @@ void snake_move(snake_t* snake)
 }
 
 
-<<<<<<< HEAD
-/* Initialize and draw the snake */
-=======
 
 /**
  * @brief Initialize and draw the snake.
@@ -91,7 +88,6 @@ void snake_move(snake_t* snake)
  * @param snake Pointer to snake structure.
  */
 
->>>>>>> dbb1c2101c7b405ae2eb86b7b226830138d8e922
 void snake_initialize(snake_t* snake) 
 {
     snake->length = INITIAL_SNAKE_LENGTH;
