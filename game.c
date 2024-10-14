@@ -49,11 +49,16 @@ int main(void)
         navswitch_update();
 
         if(snake->dead == true) {
+            ir_uart_putc('A');
             break;
         }
         if(ir_uart_read_ready_p()) {
-            game_won = true;
-            break;
+            char ch;
+            ch = ir_uart_getc();
+            if(ch == 'A'){
+                game_won = true;
+                break;
+            }
         }
         
 
@@ -83,8 +88,6 @@ int main(void)
         tinygl_update();  // Update display
     }
 
-    ir_uart_putc('A');
-
     tinygl_font_set(&font5x7_1);
     tinygl_text_speed_set(MESSAGE_RATE);
     tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
@@ -92,9 +95,8 @@ int main(void)
     if(game_won) {
         tinygl_text("Won");
     } else {
-        tinygl_text("Game Over");
+        tinygl_text("Lost");
     }
-    
 
     while(1) {
         pacer_wait();
